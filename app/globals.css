@@ -26,3 +26,9 @@ body {
 .custom-img {
   background-image: url(../public/images/banner.png);
 }
+.custom-road-img {
+  background-image: url(../public/images/roadmap.webp);
+}
+.custom-img2 {
+  background-image: url(../public/images/avatar_section.png);
+}

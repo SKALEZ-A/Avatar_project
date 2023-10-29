@@ -6,7 +6,7 @@ import logo from "../../public/images/avatar-logo.png";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
 const Navbar = () => {
-  const [nav, setNav] = useState(true);
+  const [nav, setNav] = useState(false);
 
   const handleNav = () => {
     setNav((prev) => !prev);
@@ -16,7 +16,7 @@ const Navbar = () => {
     <nav className="fixed left-0 top-0 w-full z-10 ease-in duration-300  bg-[#0e0e0e73]">
       <div className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white ">
         <Link href="/">
-          <Image src={logo} className="w-32 cursor-pointer" />
+          <Image src={logo} className="w-32 cursor-pointer" alt="logo" />
         </Link>
         <ul className="sm:flex hidden">
           <li className="p-4">
