@@ -11,7 +11,7 @@ const About = () => {
           <h1 className="p-5 font-bold text-xl text-yellow-500 text-left">
             ABOUT AVATAR PROTOCOL
           </h1>
-          <p>
+          <p className="text-sm">
             For over a decade, the fear of the unknown has had a negative effect
             on people's growth and instinct. The fear of rejection, or mission
             evolves around adoption of fear.
