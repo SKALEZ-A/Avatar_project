@@ -8,7 +8,7 @@ const Roadmap = () => {
       {/* <h1 className="  p-5 my-5 text-white w-fit text-center items-center">
         ROADMAP
       </h1> */}
-      <div className="overflow-x-auto border">
+      <div className="overflow-x-auto border rounded-lg">
         <div className="flex flex-row min-w-max">
           <div className=" w-[20rem] sm:w-[30rem] items-center ">
             <div className="grid grid-rows-2">
