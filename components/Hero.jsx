@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import banner from "../../public/images/avatarmain.png";
-
+import banner from "../public/images/avatar_section.png";
+import Claim from "../app/Claim";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -29,7 +29,7 @@ const Hero = () => {
               protocol
             </p>
             <button className=" rounded-lg bg-yellow-500 p-5 my-5 text-white">
-              <Link href={"/"}>Claim Airdrop</Link>
+              <Link href="../../app/Claim">Claim Airdrop</Link>
             </button>
           </div>
         </motion.div>

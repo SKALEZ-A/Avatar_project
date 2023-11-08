@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../../public/images/avatar_section.png";
-import tokenomics from "../../public/images/avatar_tokenomics.png";
+import logo from "../public/images/avatar_section.png";
+import tokenomics from "../public/images/avatar_tokenomics.png";
 
 const About = () => {
   return (

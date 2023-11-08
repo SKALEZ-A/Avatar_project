@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import phase from "../../public/images/avatar_section.png";
+import phase from "../public/images/avatar_section.png";
 
 const Roadmap = () => {
   return (
