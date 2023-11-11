@@ -1,5 +1,5 @@
 "use client";
-import React, { Children } from "react";
+import React from "react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import { contractAddress, contractABI } from "@/Constants/constant";
@@ -232,7 +232,7 @@ const Claim = () => {
             </p>
             <div className="flex">
               <input
-                className="bg-[#382106] rounded-lg w-[75%] h-[40px] px-2 mb-3 text-[13px] text-gray-500 mr-[3%] flex items-center md:text-sm"
+                className="bg-[#382106] rounded-lg w-[75%] h-[45px] px-2 mb-3 text-[13px] text-gray-500 mr-[3%] flex items-center md:text-sm"
                 type="number"
                 min={0}
                 value={airdropPasscode}
@@ -241,7 +241,7 @@ const Claim = () => {
               />
               <button
                 onClick={handleVerifyUser}
-                className="mb-10 border-[2px] h-[40px] w-[22%] rounded-lg border-[#9f8a49] px-2 py-2 text-[#9f8a49] text-[12px] text-center flex items-center justify-center"
+                className="mb-10 border-[2px] h-[45px] w-[22%] rounded-lg border-[#9f8a49] px-2 py-2 text-[#9f8a49] text-[12px] text-center flex items-center justify-center"
               >
                 verify
               </button>
@@ -252,7 +252,7 @@ const Claim = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <button className="mt-[-30px] mb-10 border-[2px] h-[40px] w-[100%] rounded-lg border-[#9f8a49] px-2 py-2 text-[#9f8a49] text-[12px] text-center flex items-center justify-center">
+              <button className="mt-[-30px] mb-10 border-[2px] h-[45px] w-[100%] rounded-lg border-[#9f8a49] px-2 py-2 text-[#9f8a49] text-[12px] text-center flex items-center justify-center">
                 Get you airdrop passcode
               </button>
             </a>
@@ -309,14 +309,14 @@ const FormInput = ({ task, fileName, onFileName, children }) => {
           onChange={(e) => handleUploadFile(e.target.files, onFileName)}
         />
         <div
-          className="bg-[#382106] rounded-lg w-[75%] h-[40px] px-2 mb-3 text-sm text-gray-700 mr-[3%] flex items-center"
+          className="bg-[#382106] rounded-lg w-[75%] h-[45px] px-2 mb-3 text-[13px] text-gray-700 mr-[3%] flex items-center"
           placeholder={`choose file`}
         >
           {fileName ? fileName : "choose file"}
         </div>
         <label
           for="file"
-          className="mb-10 border-[2px] h-[40px] w-[22%] rounded-lg border-[#9f8a49] px-2 py-2 text-[#9f8a49] text-[12px] text-center flex items-center justify-center"
+          className="mb-10 border-[2px] h-[45px] w-[22%] rounded-lg border-[#9f8a49] px-2 py-2 text-[#9f8a49] text-[12px] text-center flex items-center justify-center"
         >
           Upload
         </label>
