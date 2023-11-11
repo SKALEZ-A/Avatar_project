@@ -21,6 +21,7 @@ html {
 
 body {
   background-color: rgb(153, 103, 52);
+  box-sizing: border-box;
 }
 
 .custom-img {
