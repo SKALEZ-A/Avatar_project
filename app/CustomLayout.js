@@ -1,13 +1,13 @@
-import React from "react";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import React from "react"
+import { Inter } from "next/font/google"
+import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "$AVATAR",
   description: "Another ground-breaking meme Protocol",
-};
+}
 
 function CustomLayout({ children }) {
   return (
@@ -37,7 +37,7 @@ function CustomLayout({ children }) {
         </script>
       </body>
     </html>
-  );
+  )
 }
 
-export default CustomLayout;
+export default CustomLayout
