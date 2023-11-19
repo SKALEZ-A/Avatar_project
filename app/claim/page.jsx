@@ -134,6 +134,39 @@ const Claim = () => {
     }
   }
 
+  async function claimAirdrop() {
+    if (provider == null) return toast.error("Please connect your wallet")
+    if (
+      !verified &&
+      (!likeTweetFileName ||
+        !quoteRetweetFileName ||
+        !twitterFollowFileName ||
+        !userVerified)
+    )
+      return toast.error("Please complete the tasks to claim airdrop")
+
+    if (await checkUserExists())
+      return toast.error("This wallet address has claimed airdrop")
+
+    await provider.send("eth_requestAccounts", [])
+    const signer = provider.getSigner()
+    const contractInstance = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      signer
+    )
+    console.log(contractInstance.address)
+
+    const value = ethers.utils.parseEther("0.02")
+    const tx = await contractInstance.airdrop({ value: value })
+    await tx.wait()
+
+    contractInstance.on("Transfer", async (from, to, tokens, event) => {
+      console.log(from, to, tokens)
+      await handleCreateUser()
+    })
+  }
+
   const checkUserExists = async () => {
     // check if user alread exist before adding
     if (!account) return
@@ -151,37 +184,6 @@ const Claim = () => {
     const uniqueIdentifier = uniqueBytes.toString("hex")
 
     return uniqueIdentifier
-  }
-
-  async function claimAirdrop() {
-    if (provider == null) return toast.error("Please connect your wallet")
-    if (
-      !likeTweetFileName ||
-      !quoteRetweetFileName ||
-      !twitterFollowFileName ||
-      !userVerified
-    )
-      return toast.error("Please complete the tasks to claim airdrop")
-
-    if (await checkUserExists())
-      return toast.error("This wallet address has claimed airdrop")
-
-    await provider.send("eth_requestAccounts", [])
-    const signer = provider.getSigner()
-    const contractInstance = new ethers.Contract(
-      contractAddress,
-      contractABI,
-      signer
-    )
-    console.log(contractInstance.address)
-    await handleCreateUser()
-    const value = ethers.utils.parseEther("0.02")
-    const tx = await contractInstance.airdrop({ value: value })
-    await tx.wait()
-
-    // contractInstance.on("Transfer", async (from, to, tokens, event) => {
-    //   console.log(from, to, tokens)
-    // })
   }
 
   return (
