@@ -17,6 +17,7 @@ import {
 import { toast } from "react-toastify"
 import crypto from "crypto"
 import useConnectWallet from "@/components/useConnectWallet"
+import { truncateAddress } from "@/components/truncateAddress"
 
 const Claim = () => {
   const [userId, setUserId] = useState("")
@@ -205,12 +206,7 @@ const Claim = () => {
             className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
             onClick={connectFunc}
           >
-            {account
-              ? `${account.slice(0, 3)}...${account.slice(
-                  account.length - 3,
-                  account.length
-                )}`
-              : "Connect Wallet"}
+            {account ? `${truncateAddress(account)}` : "Connect Wallet"}
           </button>
         </div>
         {isConnected && (
