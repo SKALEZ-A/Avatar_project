@@ -2,20 +2,22 @@
 
 import Navbar from "@/components/Navbar"
 import useConnectWallet from "@/components/useConnectWallet"
-import { userCollection } from "@/firebase.js/firebase"
+import { userCollection } from "@/firebase/firebase"
 import { getDocs, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
-
 import { truncateAddress } from "@/components/truncateAddress"
+import avatar from "@/public/images/avatarmain.png"
 
 const Invite = () => {
   const { provider, account, isConnected, connectFunc } = useConnectWallet()
   const [referralLink, setReferralLink] = useState("")
   const [referralsList, setReferralsList] = useState([])
+  const [isLoading, setisLoading] = useState(false)
   useEffect(() => {
     const getReferralLink = async () => {
       if (!account) return connectFunc()
+      setisLoading(true)
       try {
         const userQuery = query(
           userCollection,
@@ -31,6 +33,8 @@ const Invite = () => {
         console.log(referedUserInfo)
       } catch (err) {
         console.log(err)
+      } finally {
+        setisLoading(false)
       }
     }
     getReferralLink()
@@ -75,7 +79,7 @@ const Invite = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-[150px] px-5 xl:px-[90px]">
+      <div className="bg-[url('/images/avatarmain.png')] bg-fixed bg-top mt-[100px] pb-5 px-5 xl:px-[90px]">
         <div className="text-white flex flex-col justify-between items-center  lg:flex-row">
           <div className=" w-[100%] md:w-[75%] lg:w-[40%] mb-10">
             <h1 className="text-[30px] xl:text-[35px]">
@@ -86,7 +90,8 @@ const Invite = () => {
               each one that joins Avatar Protocol
             </p>
           </div>
-          <div className="w-[100%] md:w-[75%] lg:w-[50%] bg-[#211608] py-10 px-5 rounded-lg">
+          <div className="w-[100%] md:w-[75%] lg:w-[50%] bg-[#211608]/75 py-10 px-5 rounded-lg">
+            <p className="text-sm">Claim airdrop to get referral link</p>
             <div className="relative flex items-center justify-between  bg-[#382106] mb-[10px] rounded-lg w-[100%] h-[40px] px-5 mb-3 text-sm text-gray-700">
               {referralLink ? (
                 <p className="text-gray-400">{referralLink.split("=")[1]}</p>
@@ -110,7 +115,8 @@ const Invite = () => {
           </div>
         </div>
 
-        <div className="mt-10 text-white bg-[#211608] w-[100%] py-5 px-5 rounded-lg">
+        {/* referrals */}
+        <div className="mt-10 text-white bg-[#211608]/75 w-[100%] py-5 px-5 rounded-lg">
           <p className="md:text-[20px]">
             Total referrals -{" "}
             {referralsList.length > 0 ? referralsList.length : 0}
@@ -121,7 +127,11 @@ const Invite = () => {
             Your Referrals
           </p>
           <div className="mt-5 h-[200px] overflow-y-auto border-[2px] py-3 px-3 rounded-lg border-[#9f8a49]">
-            <Referrals referralsList={referralsList} />
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <Referrals referralsList={referralsList} />
+            )}
           </div>
         </div>
       </div>
@@ -134,8 +144,8 @@ export default Invite
 const Referrals = ({ referralsList }) => {
   return (
     <ul className="flex gap-5 flex-wrap">
-      {referralsList.map((referral) => (
-        <Referral referral={referral} />
+      {referralsList.map((referral, index) => (
+        <Referral referral={referral} key={`${referral.name}${index}`} />
       ))}
     </ul>
   )
