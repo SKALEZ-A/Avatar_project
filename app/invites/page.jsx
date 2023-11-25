@@ -144,8 +144,8 @@ export default Invite
 const Referrals = ({ referralsList }) => {
   return (
     <ul className="flex gap-5 flex-wrap">
-      {referralsList.map((referral) => (
-        <Referral referral={referral} />
+      {referralsList.map((referral, index) => (
+        <Referral referral={referral} key={`${referral.name}${index}`} />
       ))}
     </ul>
   )
