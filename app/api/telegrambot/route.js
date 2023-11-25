@@ -1,4 +1,4 @@
-import { app } from "@/firebase.js/firebase"
+import { app } from "@/firebase/firebase"
 import { getFirestore } from "firebase/firestore"
 import TelegramBot from "node-telegram-bot-api"
 
