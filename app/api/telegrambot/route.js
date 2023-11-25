@@ -2,8 +2,8 @@ import { app } from "@/firebase/firebase"
 import { getFirestore } from "firebase/firestore"
 import TelegramBot from "node-telegram-bot-api"
 
-const token = process.env.TELEGRAM_BOT_TOKEN
-const publicChatId = "-4006439389"
+const token = "6983668283:AAGwAk3JDzcd-XxW-LPswVtzVhE0gQ84wPk"
+const publicChatId = "-1001807148576"
 //-1001807148576
 const bot = new TelegramBot(token)
 
