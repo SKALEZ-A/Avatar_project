@@ -1,10 +1,9 @@
 "use client"
-import React, { useRef } from "react"
 import { ethers } from "ethers"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { contractAddress, contractABI } from "@/Constants/constant"
 import { useSearchParams } from "next/navigation"
-import { userCollection } from "../../firebase.js/firebase"
+import { userCollection } from "@/firebase/firebase"
 import {
   getDocs,
   query,
@@ -44,14 +43,18 @@ const Claim = () => {
     if (!account) return
     console.log(account, "ac")
     const getUserByWalletAddress = async () => {
-      const userQuery = query(
-        userCollection,
-        where("walletAddress", "==", account)
-      )
-      const userDocs = await getDocs(userQuery)
-      if (userDocs.empty) return
-      setVerified(true)
-      console.log(userDocs.docs[0].data())
+      try {
+        const userQuery = query(
+          userCollection,
+          where("walletAddress", "==", account)
+        )
+        const userDocs = await getDocs(userQuery)
+        if (userDocs.empty) return
+        setVerified(true)
+        console.log(userDocs.docs[0].data())
+      } catch (err) {
+        console.log(err)
+      }
     }
 
     getUserByWalletAddress()
