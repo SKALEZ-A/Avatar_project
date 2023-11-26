@@ -79,7 +79,7 @@ const Invite = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-[url('/images/avatarmain.png')] bg-fixed bg-top mt-[100px] pb-5 px-5 xl:px-[90px]">
+      <div className="bg-[url('/images/avatarmain.png')]  bg-[#211608]/75  bg-fixed bg-top mt-[88px] pb-[50px] pt-10 px-5 xl:px-[90px]">
         <div className="text-white flex flex-col justify-between items-center  lg:flex-row">
           <div className=" w-[100%] md:w-[75%] lg:w-[40%] mb-10">
             <h1 className="text-[30px] xl:text-[35px]">

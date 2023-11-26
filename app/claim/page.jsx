@@ -151,23 +151,27 @@ const Claim = () => {
     if (await checkUserExists())
       return toast.error("This wallet address has claimed airdrop")
 
-    await provider.send("eth_requestAccounts", [])
-    const signer = provider.getSigner()
-    const contractInstance = new ethers.Contract(
-      contractAddress,
-      contractABI,
-      signer
-    )
-    console.log(contractInstance.address)
+    try {
+      await provider.send("eth_requestAccounts", [])
+      const signer = provider.getSigner()
+      const contractInstance = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      )
+      console.log(contractInstance.address)
 
-    const value = ethers.utils.parseEther("0.02")
-    const tx = await contractInstance.airdrop({ value: value })
-    await tx.wait()
-
-    contractInstance.on("Transfer", async (from, to, tokens, event) => {
-      console.log(from, to, tokens)
+      const value = ethers.utils.parseEther("0.02")
+      const tx = await contractInstance.airdrop({ value: value })
+      await tx.wait()
       await handleCreateUser()
-    })
+      // contractInstance.on("Transfer", async (from, to, tokens, event) => {
+      //   console.log(from, to, tokens)
+      //   await handleCreateUser()
+      // })
+    } catch (err) {
+      console.log(err.message)
+    }
   }
 
   const checkUserExists = async () => {
@@ -311,7 +315,7 @@ const Claim = () => {
               <p className="text-gray-300 mt-3">Invite friends and earn more</p>
               <p className="text-gray-400 text-sm">
                 click{" "}
-                <span className="text-[#d5b380] cursor-pointer">
+                <span className="text-[#f4bf60] font-bold text-lg cursor-pointer">
                   <a href="/invites">Here</a>
                 </span>{" "}
                 to get your referral code
