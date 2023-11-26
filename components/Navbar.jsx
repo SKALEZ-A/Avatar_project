@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed left-0 top-0 w-full z-10 ease-in duration-300  bg-[#0e0e0e73]">
+    <nav className="fixed left-0 top-0 w-full z-10 ease-in duration-300 h-[88px]  bg-[#0e0e0e73]">
       <div className="max-w-[1240px] m-auto flex justify-between items-center p-4 text-white ">
         <Link href="/">
           <Image src={logo} className="w-32 cursor-pointer" alt="logo" />
