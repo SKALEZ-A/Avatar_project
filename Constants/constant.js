@@ -1,4 +1,4 @@
-const contractAddress = "0x6D7DD2aC2272dC89711C961200951D7c7ee375c4";
+const contractAddress = "0x57677B6Bf2cDE34E158BC18Cdf5E0edA70f26E21"
 
 const contractABI = [
   {
@@ -144,19 +144,6 @@ const contractABI = [
   },
   {
     inputs: [],
-    name: "getBalance",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -181,6 +168,6 @@ const contractABI = [
     stateMutability: "view",
     type: "function",
   },
-];
+]
 
-export { contractAddress, contractABI };
+export { contractAddress, contractABI }
