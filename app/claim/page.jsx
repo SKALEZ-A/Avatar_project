@@ -65,7 +65,7 @@ const Claim = () => {
     if (!userId) return toast.error("Enter your UserID")
     try {
       const res = await fetch(
-        `http://localhost:3000/api/telegrambot?userid=${userId}`
+        `${location.origin}/api/telegrambot?userid=${userId}`
       )
       const data = await res.json()
 
