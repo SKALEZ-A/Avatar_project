@@ -82,10 +82,10 @@ const Invite = () => {
       <div className="bg-[url('/images/avatarmain.png')]  bg-[#211608]/80 bg-fixed bg-top mt-[88px] pb-[50px] pt-10 px-5 xl:px-[90px]">
         <div className="text-white flex flex-col justify-between items-center  lg:flex-row">
           <div className=" w-[100%] md:w-[75%] lg:w-[40%] mb-10">
-            <h1 className="text-[30px] xl:text-[35px]">
+            <h1 className="text-[30px] xl:text-[35px] text-[#f4bf60]">
               Invite friends to Avatar Protocol
             </h1>
-            <p>
+            <p className="font-bold">
               Tell you friends about Avatar Protocol. You'll earn a bonus for
               each one that joins Avatar Protocol
             </p>
