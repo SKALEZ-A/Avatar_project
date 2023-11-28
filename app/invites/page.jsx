@@ -1,5 +1,7 @@
 "use client"
 
+import { ethers } from "ethers"
+import { contractAddress, contractABI } from "@/Constants/constant"
 import Navbar from "@/components/Navbar"
 import useConnectWallet from "@/components/useConnectWallet"
 import { userCollection } from "@/firebase/firebase"
@@ -76,6 +78,29 @@ const Invite = () => {
     }
   }
 
+  // ============== CLAIM REWARDS IMPLEMENTATION ===============
+  // in the claim function the addReferral function is called which sets the uint as current referral no.
+  const claimReward = async () => {
+    //call the claim function from the contract and pass all the user info
+    if (provider == null) return toast.error("Please connect your wallet")
+
+    try {
+      await provider.send("eth_requestAccounts", [])
+      const signer = provider.getSigner()
+      const contractInstance = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      )
+      console.log(contractInstance.address)
+
+      const tx = await contractInstance.claimReward()
+      await tx.wait()
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
   return (
     <>
       <Navbar />
@@ -132,6 +157,14 @@ const Invite = () => {
             ) : (
               <Referrals referralsList={referralsList} />
             )}
+          </div>
+          <div>
+            <button
+              className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
+              onClick={connectFunc}
+            >
+              {account ? `${claimReward}` : "Connect wallet"}
+            </button>
           </div>
         </div>
       </div>

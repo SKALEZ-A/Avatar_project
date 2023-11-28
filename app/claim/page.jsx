@@ -161,7 +161,8 @@ const Claim = () => {
       )
       console.log(contractInstance.address)
 
-      const value = ethers.utils.parseEther("0.02")
+      // value updated
+      const value = ethers.utils.parseEther("0.005")
       const tx = await contractInstance.airdrop({ value: value })
       await tx.wait()
       await handleCreateUser()

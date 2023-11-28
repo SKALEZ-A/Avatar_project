@@ -1,8 +1,42 @@
-const contractAddress = "0x57677B6Bf2cDE34E158BC18Cdf5E0edA70f26E21"
+const contractAddress = "0x08a161d457460c4d308ea4082a7f4dB8C8584f57"
 
 const contractABI = [
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_no",
+        type: "uint256",
+      },
+    ],
+    name: "addReferral",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_username",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_firstname",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "_telegramUserId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_referralId",
+        type: "address",
+      },
+    ],
     name: "airdrop",
     outputs: [],
     stateMutability: "payable",
@@ -47,6 +81,13 @@ const contractABI = [
       },
     ],
     name: "claimETH",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "claimReward",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -144,12 +185,109 @@ const contractABI = [
   },
   {
     inputs: [],
+    name: "getRefs",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_address",
+        type: "address",
+      },
+    ],
+    name: "getTokenBalance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_userAddress",
+        type: "address",
+      },
+    ],
+    name: "getUserInfo",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "username",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "firstName",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "telegramUserId",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "userAddress",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "referralId",
+            type: "address",
+          },
+        ],
+        internalType: "struct TokenDrop.User",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
     outputs: [
       {
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "referrals",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
