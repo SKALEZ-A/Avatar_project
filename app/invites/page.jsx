@@ -161,9 +161,9 @@ const Invite = () => {
           <div>
             <button
               className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
-              onClick={connectFunc}
+              onClick={claimReward}
             >
-              {account ? `${claimReward}` : "Connect wallet"}
+              {account ? `Claim Reward` : "Connect wallet"}
             </button>
           </div>
         </div>
