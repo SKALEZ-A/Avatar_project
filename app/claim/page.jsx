@@ -35,9 +35,9 @@ const Claim = () => {
   const ref = useRef(null)
 
   // const { provider, account, isConnected, connectFunc } = useConnectWallet()
-
   const account = useAddress() // get address when wallet is connected or undefined if not connected
-  const { contract } = useContract(contractAddress, contractABI) // get contract we want to i
+  const { contract } = useContract(contractAddress, contractABI) // get contract we want to interact with
+
   const isConnected = account ? true : false
   const { mutateAsync, error } = useContractWrite(contract, "airdrop")
   useEffect(() => {
