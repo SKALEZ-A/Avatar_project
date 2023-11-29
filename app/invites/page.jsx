@@ -16,6 +16,7 @@ const Invite = () => {
   const [referralLink, setReferralLink] = useState("")
   const [referralsList, setReferralsList] = useState([])
   const [isLoading, setisLoading] = useState(false)
+  const [isClaiming, setIsClaiming] = useState(false)
   useEffect(() => {
     const getReferralLink = async () => {
       if (!account) return connectFunc()
@@ -82,6 +83,7 @@ const Invite = () => {
   // in the claim function the addReferral function is called which sets the uint as current referral no.
   const claimReward = async () => {
     //call the claim function from the contract and pass all the user info
+    setIsClaiming(true)
     if (provider == null) return toast.error("Please connect your wallet")
 
     try {
@@ -95,9 +97,20 @@ const Invite = () => {
       console.log(contractInstance.address)
 
       const tx = await contractInstance.claimReward()
+
       await tx.wait()
+      toast.success("Referral points claimed successfully")
     } catch (err) {
+      if (
+        err.message
+          .toLowerCase()
+          .includes("insufficient referrals to claim reward")
+      )
+        return toast.error("Insufficient referrals to claim reward")
+      toast.error("Unable to claim reward")
       console.log(err.message)
+    } finally {
+      setIsClaiming(false)
     }
   }
 
@@ -119,7 +132,9 @@ const Invite = () => {
             <p className="text-sm">Claim airdrop to get referral link</p>
             <div className="relative flex items-center justify-between  bg-[#382106] mb-[10px] rounded-lg w-[100%] h-[40px] px-5 mb-3 text-sm text-gray-700">
               {referralLink ? (
-                <p className="text-gray-400">{referralLink.split("=")[1]}</p>
+                <p className="text-gray-400">
+                  {truncateAddress(referralLink.split("=")[1])}
+                </p>
               ) : (
                 <p className="text-gray-400">referral Id (optional)</p>
               )}
@@ -162,8 +177,13 @@ const Invite = () => {
             <button
               className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
               onClick={claimReward}
+              disabled={isClaiming}
             >
-              {account ? `Claim Reward` : "Connect wallet"}
+              {account
+                ? isClaiming
+                  ? "Claiming..."
+                  : "Claim Reward"
+                : "Connect wallet"}
             </button>
           </div>
         </div>
