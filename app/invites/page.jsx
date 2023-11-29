@@ -3,23 +3,27 @@
 import { ethers } from "ethers"
 import { contractAddress, contractABI } from "@/Constants/constant"
 import Navbar from "@/components/Navbar"
-import useConnectWallet from "@/components/useConnectWallet"
+import ConnectWallet from "@/components/ConnectWallet"
 import { userCollection } from "@/firebase/firebase"
 import { getDocs, query, where } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { truncateAddress } from "@/components/truncateAddress"
 import avatar from "@/public/images/avatarmain.png"
+import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react"
 
 const Invite = () => {
-  const { provider, account, isConnected, connectFunc } = useConnectWallet()
+  const account = useAddress() // get address when wallet is connected or undefined if not connected
+  const { contract } = useContract(contractAddress, contractABI) // get contract we want to interact with
+  const { mutateAsync, error } = useContractWrite(contract, "claimReward")
+
   const [referralLink, setReferralLink] = useState("")
   const [referralsList, setReferralsList] = useState([])
   const [isLoading, setisLoading] = useState(false)
   const [isClaiming, setIsClaiming] = useState(false)
   useEffect(() => {
     const getReferralLink = async () => {
-      if (!account) return connectFunc()
+      if (!account) return
       setisLoading(true)
       try {
         const userQuery = query(
@@ -84,21 +88,22 @@ const Invite = () => {
   const claimReward = async () => {
     //call the claim function from the contract and pass all the user info
     setIsClaiming(true)
-    if (provider == null) return toast.error("Please connect your wallet")
+    if (!account) return toast.error("Please connect your wallet")
 
     try {
-      await provider.send("eth_requestAccounts", [])
-      const signer = provider.getSigner()
-      const contractInstance = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      )
-      console.log(contractInstance.address)
+      // await provider.send("eth_requestAccounts", [])
+      // const signer = provider.getSigner()
+      // const contractInstance = new ethers.Contract(
+      //   contractAddress,
+      //   contractABI,
+      //   signer
+      // )
+      // console.log(contractInstance.address)
 
-      const tx = await contractInstance.claimReward()
+      // const tx = await contractInstance.claimReward()
+      // await tx.wait()
 
-      await tx.wait()
+      await mutateAsync({ args: [] }) // function returned from useContractWrite hook, call function to send claim reward transaction
       toast.success("Referral points claimed successfully")
     } catch (err) {
       if (
@@ -146,12 +151,13 @@ const Invite = () => {
               </p>
             </div>
 
-            <button
+            {/* <button
               className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
               onClick={connectFunc}
             >
               {account ? `${truncateAddress(account)}` : "Connect wallet"}
-            </button>
+            </button> */}
+            <ConnectWallet />
           </div>
         </div>
 
@@ -177,7 +183,7 @@ const Invite = () => {
             <button
               className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
               onClick={claimReward}
-              disabled={isClaiming}
+              disabled={!account ? true : isClaiming ? true : false}
             >
               {account
                 ? isClaiming
