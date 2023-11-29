@@ -1,13 +1,6 @@
-const contractAddress = "0x6D7DD2aC2272dC89711C961200951D7c7ee375c4";
+const contractAddress = "0xEBc3f18d62013Bc8ece573eC984738bc82f45E19"
 
 const contractABI = [
-  {
-    inputs: [],
-    name: "airdrop",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
   {
     inputs: [
       {
@@ -39,6 +32,70 @@ const contractABI = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferred",
+    type: "event",
+  },
+  {
+    stateMutability: "payable",
+    type: "fallback",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_no",
+        type: "uint256",
+      },
+    ],
+    name: "addReferral",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_username",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_firstname",
+        type: "string",
+      },
+      {
+        internalType: "uint256",
+        name: "_telegramUserId",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "_referralId",
+        type: "address",
+      },
+    ],
+    name: "airdrop",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -47,6 +104,13 @@ const contractABI = [
       },
     ],
     name: "claimETH",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "claimReward",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -83,73 +147,78 @@ const contractABI = [
     type: "function",
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "OwnershipTransferred",
-    type: "event",
-  },
-  {
     inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "getRefs",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
     inputs: [
       {
         internalType: "address",
-        name: "newOwner",
+        name: "_address",
         type: "address",
       },
     ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    stateMutability: "payable",
-    type: "fallback",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "withdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    stateMutability: "payable",
-    type: "receive",
-  },
-  {
-    inputs: [],
-    name: "getBalance",
+    name: "getTokenBalance",
     outputs: [
       {
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_userAddress",
+        type: "address",
+      },
+    ],
+    name: "getUserInfo",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "username",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "firstName",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "telegramUserId",
+            type: "uint256",
+          },
+          {
+            internalType: "address",
+            name: "userAddress",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "referralId",
+            type: "address",
+          },
+        ],
+        internalType: "struct TokenDrop.User",
+        name: "",
+        type: "tuple",
       },
     ],
     stateMutability: "view",
@@ -169,6 +238,32 @@ const contractABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "referrals",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "token",
     outputs: [
@@ -181,6 +276,35 @@ const contractABI = [
     stateMutability: "view",
     type: "function",
   },
-];
-
-export { contractAddress, contractABI };
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256",
+      },
+    ],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    stateMutability: "payable",
+    type: "receive",
+  },
+]
+export { contractAddress, contractABI }

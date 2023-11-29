@@ -26,6 +26,7 @@ const Claim = () => {
   const [likeTweetFileName, setLikeTweetFileName] = useState("")
   const [quoteRetweetFileName, setQuoteRetweetFileName] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isClaiming, setIsClaiming] = useState(false)
   const [verified, setVerified] = useState(false)
 
   const searchParams = useSearchParams()
@@ -119,7 +120,7 @@ const Claim = () => {
 
   // create user once they claim airdrop
   const handleCreateUser = async () => {
-    const refId = getRandomId()
+    const refId = account
     const newUserData = {
       telegramFirstName: ref.current.name,
       telegramUsername: ref.current.username,
@@ -138,6 +139,7 @@ const Claim = () => {
   }
 
   async function claimAirdrop() {
+    setIsClaiming(true)
     if (provider == null) return toast.error("Please connect your wallet")
     if (
       !verified &&
@@ -161,16 +163,36 @@ const Claim = () => {
       )
       console.log(contractInstance.address)
 
-      const value = ethers.utils.parseEther("0.02")
-      const tx = await contractInstance.airdrop({ value: value })
+      // check if referralId exists, if not use zero address
+      let refId
+      if (referralId) {
+        refId = referralId
+      } else {
+        refId = "0x0000000000000000000000000000000000000000"
+      }
+      // value updated
+      const value = ethers.utils.parseEther("0.01")
+      const tx = await contractInstance.airdrop(
+        ref.current.username,
+        ref.current.name,
+        userId,
+        refId,
+        { value: value }
+      )
       await tx.wait()
       await handleCreateUser()
       // contractInstance.on("Transfer", async (from, to, tokens, event) => {
       //   console.log(from, to, tokens)
       //   await handleCreateUser()
       // })
+      toast.success("Airdrop claimed succesfully")
     } catch (err) {
+      if (err.message.toLowerCase().includes("trading not enabled"))
+        return toast.error("You cannot claim airdop yet")
+      toast.error("Unable to claim airdrop")
       console.log(err.message)
+    } finally {
+      setIsClaiming(false)
     }
   }
 
@@ -323,8 +345,9 @@ const Claim = () => {
               <button
                 className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[200px]"
                 onClick={claimAirdrop}
+                disabled={isClaiming}
               >
-                Claim airdrop
+                {isClaiming ? "Claiming..." : "Claim airdrop"}
               </button>
             </div>
           </div>
