@@ -155,8 +155,8 @@ const Claim = () => {
     )
       return toast.error("Please complete the tasks to claim airdrop")
 
-    // if (await checkUserExists())
-    //   return toast.error("This wallet address has claimed airdrop")
+    if (await checkUserExists())
+      return toast.error("This wallet address has claimed airdrop")
 
     try {
       // await provider.send("eth_requestAccounts", [])
