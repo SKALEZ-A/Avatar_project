@@ -15,8 +15,9 @@ import {
 } from "firebase/firestore"
 import { toast } from "react-toastify"
 import crypto from "crypto"
-import useConnectWallet from "@/components/useConnectWallet"
+import ConnectWallet from "@/components/ConnectWallet"
 import { truncateAddress } from "@/components/truncateAddress"
+import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react"
 
 const Claim = () => {
   const [userId, setUserId] = useState("")
@@ -33,8 +34,12 @@ const Claim = () => {
 
   const ref = useRef(null)
 
-  const { provider, account, isConnected, connectFunc } = useConnectWallet()
+  // const { provider, account, isConnected, connectFunc } = useConnectWallet()
+  const account = useAddress() // get address when wallet is connected or undefined if not connected
+  const { contract } = useContract(contractAddress, contractABI) // get contract we want to interact with
 
+  const isConnected = account ? true : false
+  const { mutateAsync, error } = useContractWrite(contract, "airdrop")
   useEffect(() => {
     setReferralId(searchParams.get("referralId"))
   }, [searchParams])
@@ -140,7 +145,7 @@ const Claim = () => {
 
   async function claimAirdrop() {
     setIsClaiming(true)
-    if (provider == null) return toast.error("Please connect your wallet")
+    if (!account) return toast.error("Please connect your wallet")
     if (
       !verified &&
       (!likeTweetFileName ||
@@ -154,14 +159,14 @@ const Claim = () => {
       return toast.error("This wallet address has claimed airdrop")
 
     try {
-      await provider.send("eth_requestAccounts", [])
-      const signer = provider.getSigner()
-      const contractInstance = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      )
-      console.log(contractInstance.address)
+      // await provider.send("eth_requestAccounts", [])
+      // const signer = provider.getSigner()
+      // const contractInstance = new ethers.Contract(
+      //   contractAddress,
+      //   contractABI,
+      //   signer
+      // )
+      // console.log(contractInstance.address)
 
       // check if referralId exists, if not use zero address
       let refId
@@ -172,19 +177,21 @@ const Claim = () => {
       }
       // value updated
       const value = ethers.utils.parseEther("0.01")
-      const tx = await contractInstance.airdrop(
-        ref.current.username,
-        ref.current.name,
-        userId,
-        refId,
-        { value: value }
-      )
-      await tx.wait()
+      // const tx = await contractInstance.airdrop(
+      //   ref.current.username,
+      //   ref.current.name,
+      //   userId,
+      //   refId,
+      //   { value: value }
+      // )
+      // await tx.wait()
+
+      // function returned from thirdweb useContractWrite hook, call function to send airdrop transaction
+      await mutateAsync({
+        args: [ref.current.username, ref.current.name, userId, refId],
+        overrides: { value },
+      })
       await handleCreateUser()
-      // contractInstance.on("Transfer", async (from, to, tokens, event) => {
-      //   console.log(from, to, tokens)
-      //   await handleCreateUser()
-      // })
       toast.success("Airdrop claimed succesfully")
     } catch (err) {
       if (err.message.toLowerCase().includes("trading not enabled"))
@@ -233,12 +240,13 @@ const Claim = () => {
           <p className="text-gray-500 mt-1 text-sm md:text-base">
             Complete Tasks And Claim Instant Self-Drop
           </p>
-          <button
+          {/* <button
             className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[150px]"
             onClick={connectFunc}
           >
             {account ? `${truncateAddress(account)}` : "Connect Wallet"}
-          </button>
+          </button> */}
+          <ConnectWallet /> {/* thirdweb connect wallet button */}
         </div>
         {isConnected && (
           <div className="w-[100%] md:mt-[40px] m-auto  py-[60px] px-[10%] rounded-lg border-0 border-[#d5b380] md:px-[10%] md:w-[70%] md:border-2 lg:px[20%]">
@@ -345,9 +353,13 @@ const Claim = () => {
               <button
                 className=" mt-3 rounded-lg bg-[#f4bf60] px-3 py-[5px] text-black w-[200px]"
                 onClick={claimAirdrop}
-                disabled={isClaiming}
+                disabled={verified ? true : isClaiming}
               >
-                {isClaiming ? "Claiming..." : "Claim airdrop"}
+                {verified
+                  ? "Claimed airdrop"
+                  : isClaiming
+                  ? "Claiming..."
+                  : "Claim airdrop"}
               </button>
             </div>
           </div>
