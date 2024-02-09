@@ -1,14 +1,14 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import banner from "../public/images/avatarmain.png";
+"use client"
+import React from "react"
+import Image from "next/image"
+import banner from "../public/images/avatarmain.png"
 
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { motion } from "framer-motion"
+import Link from "next/link"
 
 const Hero = () => {
   return (
-    <section className="lg:pt-8 flex flex-items justify-center h-screen mb-12 bg-fixed bg-center bg-cover custom-img relative items-center ">
+    <section className="lg:pt-8 flex flex-items justify-center md:h-screen mb-12 bg-fixed bg-center bg-cover custom-img relative items-center ">
       {/* overlay */}
       <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 z-[2] " />
       {/* <div className="grid grid-cols-1 sm:grid-cols-12 gap-5"> */}
@@ -49,7 +49,7 @@ const Hero = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
