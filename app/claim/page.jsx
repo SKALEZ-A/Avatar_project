@@ -265,7 +265,14 @@ const Claim = () => {
                   fileName={twitterFollowFileName}
                   onFileName={setTwitterFollowFileName}
                 >
-                  Follow <span className="text-[#d5b380]">@avatarprotocol</span>{" "}
+                  Follow{" "}
+                  <a
+                    href="https://t.me/+6X5jBNHPvXo4NGRk"
+                    target="_blank"
+                    className="text-[#d5b380]"
+                  >
+                    @avatarprotocol
+                  </a>{" "}
                   on twitter
                 </FormInput>
                 <FormInput
