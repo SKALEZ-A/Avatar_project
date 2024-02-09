@@ -267,7 +267,7 @@ const Claim = () => {
                 >
                   Follow{" "}
                   <a
-                    href="https://t.me/+6X5jBNHPvXo4NGRk"
+                    href="https://x.com/avatar_protocol?s=21&t=XGP8_i1AQ5Uu_NMVgUf03A"
                     target="_blank"
                     className="text-[#d5b380]"
                   >
@@ -303,7 +303,7 @@ const Claim = () => {
                     Join our{" "}
                     <span className="text-[#d5b380]">
                       <a
-                        href="https://t.me/+TdNyqs6AM7tiZGY0"
+                        href="https://t.me/+6X5jBNHPvXo4NGRk"
                         target="_blank"
                         rel="noreferrer"
                       >
