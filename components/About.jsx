@@ -37,7 +37,7 @@ const About = () => {
               <ul className="w-auto text-white list-disc">
                 <li className="flex items-center">
                   <span className="mr-2 text-yellow-500">&#8226;</span>{" "}
-                  0x834hf934f03h8f934h9f398038fh40h343839bhb
+                  0xdB1D576096e0172B7906E32efc7246AB5eD071b4
                 </li>
                 <li className="flex items-center">
                   <span className="mr-2 text-yellow-500">&#8226;</span>{" "}
@@ -45,7 +45,7 @@ const About = () => {
                 </li>
                 <li className="flex items-center">
                   <span className="mr-2 text-yellow-500">&#8226;</span> Token
-                  Symbol: $AVA
+                  Symbol: $AVATAR
                 </li>
                 <li className="flex items-center">
                   <span className="mr-2 text-yellow-500">&#8226;</span> Decimal:
@@ -53,7 +53,7 @@ const About = () => {
                 </li>
                 <li className="flex items-center">
                   <span className="mr-2 text-yellow-500">&#8226;</span> Total
-                  supply of 1,000,000,000 tokens
+                  supply of 100,000,000 tokens
                 </li>
               </ul>
             </div>
