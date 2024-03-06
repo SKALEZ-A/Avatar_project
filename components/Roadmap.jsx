@@ -5,11 +5,11 @@ import phase from "../public/images/avatar_section.png"
 const Roadmap = () => {
   return (
     <section className=" my-16">
-      {/* <h1 className="  p-5 my-5 text-white w-fit text-center items-center">
+      {/* <h1 className="  p-5 my-5 text-gray-300 w-fit text-center items-center">
         ROADMAP
       </h1> */}
       <div className="overflow-x-auto border rounded-lg border-[#0e0e0e73]">
-        <div className="flex flex-row min-w-max">
+        <div className="flex flex-row w-auto">
           <div className=" w-[20rem] sm:w-[30rem] items-center ">
             <div className="grid grid-rows-2">
               <div className="flex row-span-1 h-[12rem] flex-items justify-center m-0  bg-center bg-cover custom-img2 relative items-center ">
@@ -23,7 +23,7 @@ const Roadmap = () => {
                 </div>
               </div>
               <div className="w-full row-span-1 items-center justify-center flex">
-                <ul className="w-auto text-white list-none">
+                <ul className="w-auto text-gray-300 list-none">
                   <li className="flex items-center">
                     <span className="mr-2 text-yellow-500">&#8226;</span> Wallet
                     Launch
@@ -51,7 +51,7 @@ const Roadmap = () => {
           <div className=" w-[20rem] sm:w-[30rem] items-center ">
             <div className="grid grid-rows-2">
               <div className="w-full row-span-1 items-center justify-center flex">
-                <ul className="w-auto text-white list-none">
+                <ul className="w-auto text-gray-300 list-none">
                   <li className="flex items-center">
                     <span className="mr-2 text-yellow-500">&#8226;</span>{" "}
                     Airdrop Phase 2
@@ -101,7 +101,7 @@ const Roadmap = () => {
                 </div>
               </div>
               <div className="w-full row-span-1 items-center justify-center flex">
-                <ul className="w-auto text-white list-none">
+                <ul className="w-auto text-gray-300 list-none">
                   <li className="flex items-center">
                     <span className="mr-2 text-yellow-500">&#8226;</span> Heavy
                     Project Partnership
@@ -134,7 +134,7 @@ const Roadmap = () => {
           <div className=" w-[20rem] sm:w-[30rem] items-center ">
             <div className="grid grid-rows-2">
               <div className="w-full row-span-1 items-center justify-center flex">
-                <ul className="w-auto text-white list-none">
+                <ul className="w-auto text-gray-300 list-none">
                   <li className="flex items-center">
                     <span className="mr-2 text-yellow-500">&#8226;</span>{" "}
                     Coingecko and Coinmarketcap Listing

@@ -15,8 +15,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThirdwebProvider
-          activeChain="goerli"
-          clientId="5a1c13c31c6426317b1d1c2f5dcb1240"
+          activeChain="binance"
+          clientId="c24255f27090571ead1beac4706f9b3a"
         >
           {children}
           <ToastContainer />

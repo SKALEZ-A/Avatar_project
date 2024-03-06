@@ -1,4 +1,5 @@
-const contractAddress = "0xCb64288c8D6558D08BDEDc9e0e507cda5dBb40BE"
+// airdrop contract
+const contractAddress = "0x410BECD7dB7ec11283B4BcAD673c4EDA4d1f7c55"
 
 const contractABI = [
   {
