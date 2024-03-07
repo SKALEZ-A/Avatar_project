@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from "react"
+import Image from "next/image"
 // import logo from "../../public/images/skalez_logo.png";
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
         <p className="text-white text-center">2023 Avatar Protocol.</p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
