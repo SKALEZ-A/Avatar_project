@@ -1,4 +1,5 @@
-import React from "react"
+"use client"
+import React, { useState } from "react"
 import Image from "next/image"
 import x from "../public/images/simple-icons_x.png"
 import avatar2 from "../public/images/avatar-2.webp"
@@ -8,91 +9,65 @@ import tokenomics from "../public/images/tokenomics.png"
 import Link from "next/link"
 
 const About = () => {
+  const [copied, setCopied] = useState(false)
+
+  const copyToClipboard = () => {
+    const contractAddr = document.querySelector(".contract-addr")
+
+    if (contractAddr) {
+      const textToCopy = contractAddr.textContent
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        setCopied(true)
+        setTimeout(() => {
+          setCopied(false)
+        }, 2000) // Reset "Copied" after 2 seconds
+      })
+    }
+  }
   return (
     <div className="text-white container  justify-center w-auto  flex flex-col ">
-      <h1 className="p-5 font-bold text-2xl md:text-4xl text-yellow-500 justify-center text-center">
+      <h1 className="p-3 font-bold text-3xl md:text-5xl text-yellow-500 justify-center text-center">
         ABOUT AVATAR PROTOCOL
       </h1>
-      <div className="flex flex-col md:flex-row  justify-center  gap-5 my-8 sm:my-16">
-        <div className="mx-5 text-left border p-3 rounded-xl max-w-xl border-[#0e0e0e73] md:w-1/2">
+      <div className="flex flex-col md:flex-row  justify-center  gap-5 my-8 ">
+        <div className="mx-5 text-left border p-3 rounded-xl max-w-xl border-[#0e0e0e73] md:w-1/2 md:my-32 my-16 mt-8 md:mt-32">
           <p className="text-sm  text-gray-300">
-            For over a decade, the fear of the unknown has had a negative effect
-            on people's growth and instinct. The fear of rejection, or mission
-            evolves around adoption of fear.
+            $AVATAR goes beyond the typical meme-token story. Experience a blend
+            of value-generating utilities and community-driven growth.
             <br />
-            <br /> Its our greatest weapon, preparation and training for
-            evolution of technology in your own world as your own $Avatar
-            exploring every niche of web3 and opportunities sorrounding it.
             <br />
-            <br /> Giving every person a chance to attain their own $Avatar the
-            way they want to attain independence and freedom, providing access
-            and solutions.
+            Dive into the avatar world with our self-drop tokens. Picture a
+            vibrant ecosystem where every element harmonizes, forming a
+            self-sustaining symphony of value. Our goal is to create a dynamic
+            world where each component enhances both our token and our cherished
+            community of holders.
           </p>
         </div>
-        <div className="rounded-3xl md:w-1/2 justify-center items-center">
+        <div className="rounded-3xl md:w-1/2 justify-center items-center flex">
           <Image src={avatar2} className="w-full rounded-2xl" alt="logo" />
         </div>
       </div>
 
       {/* TOKENOMICS  */}
-      <div className=" w-auto flex flex-col md:flex-row-reverse">
-        <div className="md:w-1/2">
-          <div className=" border border-[#0e0e0e73] p-3 rounded-xl mx-5 w-auto h-auto row-span-5  flex items-start flex-col justify-center leading-loose text-sm">
-            <span className="text-3xl font-bold p-5 text-yellow-500">
-              Tokenomics
-            </span>
-            <div className="w-full row-span-1 items-center justify-center flex">
-              <ul className="w-auto text-white list-disc">
-                <li className="flex items-center">
-                  <span className="mr-2 text-yellow-500">&#8226;</span>{" "}
-                  0xdB1D576096e0172B7906E32efc7246AB5eD071b4
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-yellow-500">&#8226;</span>{" "}
-                  <h1>Token Name: AVATAR PROTOCOL</h1>
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-yellow-500">&#8226;</span> Token
-                  Symbol: $AVATAR
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-yellow-500">&#8226;</span> Decimal:
-                  18
-                </li>
-                <li className="flex items-center">
-                  <span className="mr-2 text-yellow-500">&#8226;</span> Total
-                  supply of 100,000,000 tokens
-                </li>
-              </ul>
+      <div className=" w-auto flex flex-col md:flex-row-reverse gap-5 my-8 justify-center items-center">
+        <div className="md:w-1/2 flex justify-center items-center">
+          <div className="p-3 rounded-xl mx-5 w-auto h-auto row-span-5  flex flex-col  leading-loose text-sm justify-center items-center gap-5">
+            <button className="text-2xl font-bold p-5 text-yellow-500 text-center rounded-full border border-yellow-700">
+              Token Address
+            </button>
+            <div className="w-full row-span-1 items-center justify-center flex ">
+              <p className="text-2xl text-gray-200">
+                Our Official Contract Address
+              </p>
             </div>
-          </div>
-          <div className=" border border-[#0e0e0e73] p-3 rounded-xl mx-5 w-auto row-span-2">
-            <h1 className="p-5 font-bold text-xl text-yellow-500 text-left">
-              Follow our socials:
-            </h1>
-            <div className="flex flex-row w-auto items-center gap-5">
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://t.me/+9GMQ6B3XyVI2NDdk"
-                className="inline-flex justify-center gap-x-0 "
-              >
-                <span className="flex gap-3 items-center">
-                  Twitter
-                  <Image
-                    src={x}
-                    className="w-10 h-10 rounded-full border p-1"
-                  />
-                </span>
-              </Link>
-
-              <span className="flex gap-3 items-center">
-                Telegram
-                <Image
-                  src={telegram}
-                  className="w-10 h-10 rounded-full border p-1"
-                />
-              </span>
+            <div className="rounded-full p-5 border border-yellow-700 contract-addr bg-yellow-700 text-gray-300">
+              0xDEBD7cfFf5B3E5dE2123FBB219615ECdd409C863
+            </div>
+            <div
+              className="rounded-full p-5 w-[200px] border flex justify-center items-center border-yellow-700 cursor-pointer bg-black hover:bg-gray-900"
+              onClick={copyToClipboard}
+            >
+              <button className="">{copied ? "Copied!" : "Copy"}</button>
             </div>
           </div>
         </div>
