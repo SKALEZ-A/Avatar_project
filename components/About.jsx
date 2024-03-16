@@ -7,6 +7,7 @@ import discord from "../public/images/discord-white-icon.webp"
 import telegram from "../public/images/telegram1.png"
 import tokenomics from "../public/images/tokenomics.png"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 const About = () => {
   const [copied, setCopied] = useState(false)
@@ -26,9 +27,14 @@ const About = () => {
   }
   return (
     <div className="text-white container  justify-center w-auto  flex flex-col ">
-      <h1 className="p-3 font-bold text-3xl md:text-5xl text-yellow-500 justify-center text-center">
+      <motion.h1
+        initial={{ opacity: 0.5, scale: 0.5 }}
+        transition={{ duration: 2 }}
+        whileInView={{ opacity: 1, scale: 1.1 }}
+        className="p-3 font-bold text-3xl md:text-5xl text-yellow-500 justify-center text-center"
+      >
         ABOUT AVATAR PROTOCOL
-      </h1>
+      </motion.h1>
       <div className="flex flex-col md:flex-row  justify-center  gap-5 my-8 ">
         <div className="mx-5 text-left border p-3 rounded-xl max-w-xl border-[#0e0e0e73] md:w-1/2 md:my-32 my-16 mt-8 md:mt-32">
           <p className="text-sm  text-gray-300">
@@ -43,32 +49,55 @@ const About = () => {
             community of holders.
           </p>
         </div>
-        <div className="rounded-3xl md:w-1/2 justify-center items-center flex">
+        <motion.div
+          initial={{ opacity: 0.5, scale: 0.5 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="rounded-3xl md:w-1/2 justify-center items-center flex"
+        >
           <Image src={avatar2} className="w-full rounded-2xl" alt="logo" />
-        </div>
+        </motion.div>
       </div>
 
       {/* TOKENOMICS  */}
       <div className=" w-auto flex flex-col md:flex-row-reverse gap-5 my-8 justify-center items-center">
         <div className="md:w-1/2 flex justify-center items-center">
           <div className="p-3 rounded-xl mx-5 w-auto h-auto row-span-5  flex flex-col  leading-loose text-sm justify-center items-center gap-5">
-            <button className="text-2xl font-bold p-5 text-yellow-500 text-center rounded-full border border-yellow-700">
+            <motion.button
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1, x: 20 }}
+              transition={{ staggerChildren: 1 }}
+              className="text-2xl font-bold p-5 text-yellow-500 text-center rounded-full border border-yellow-700"
+            >
               Token Address
-            </button>
-            <div className="w-full row-span-1 items-center justify-center flex ">
-              <p className="text-2xl text-gray-200">
+            </motion.button>
+            <motion.div className="w-full row-span-1 items-center justify-center flex ">
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1, x: 20 }}
+                transition={{ staggerChildren: 3 }}
+                className="text-2xl text-gray-200"
+              >
                 Our Official Contract Address
-              </p>
-            </div>
-            <div className="rounded-full p-5 border border-yellow-700 contract-addr bg-yellow-700 text-gray-300">
+              </motion.p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1, x: 20 }}
+              transition={{ staggerChildren: 5 }}
+              className="rounded-full p-5 border border-yellow-700 contract-addr bg-yellow-700 text-gray-300"
+            >
               0xDEBD7cfFf5B3E5dE2123FBB219615ECdd409C863
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              whileTap={{ scale: 0.9 }}
               className="rounded-full p-5 w-[200px] border flex justify-center items-center border-yellow-700 cursor-pointer bg-black hover:bg-gray-900"
               onClick={copyToClipboard}
             >
-              <button className="">{copied ? "Copied!" : "Copy"}</button>
-            </div>
+              <motion.button className="">
+                {copied ? "Copied!" : "Copy"}
+              </motion.button>
+            </motion.div>
           </div>
         </div>
         <div className="md:w-1/2">
